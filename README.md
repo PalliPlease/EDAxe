@@ -12,4 +12,4 @@ EDAxe is a Python library for automatic exploratory data analysis, missing value
 ## Installation
 
 ```bash
-coming soon
+!pip install git+https://github.com/PalliPlease/EDAxe.git
