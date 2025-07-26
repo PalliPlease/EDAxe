@@ -1,3 +1,15 @@
+"""
+Description:
+    Functions to handle the missing values in the datasets.
+
+Current Functions:
+    Total: 3
+
+Future Plans:
+    Add maybe the encoding features, but where?
+"""
+
+
 def remove_rows(data, columns=None, threshold=5):
     """
     Drop rows where specified (or all) columns have missing values,
@@ -95,7 +107,7 @@ def impute_values(data, columns=None, strategy='auto', fill_value=None):
             A copy of the original DataFrame with missing values imputed.
 
     Future Plans:
-        Plan to support KNN, linear regression-based imputation, and categorical encoders.
+        Plan to support KNN, linear regression-based imputation, and categorical data.
     """
     data = data.copy()
 
