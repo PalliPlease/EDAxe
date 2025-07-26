@@ -13,6 +13,8 @@
            Categorical! OH NOES!
         -> Export to HTML as well
         -> Optimization?
+        -> Hardcoded dtypes will fail
+        -> Skew calc on non-numeric gives NaN
 """
 
 import pandas as pd
