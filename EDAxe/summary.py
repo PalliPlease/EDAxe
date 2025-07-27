@@ -240,5 +240,3 @@ def generate_summary(data, return_data=True, target=None, show=True, save=False,
 
     if return_data:
         return summary
-
-generate_summary(data)
