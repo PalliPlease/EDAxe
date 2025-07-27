@@ -1,19 +1,19 @@
 # EDAxe – Cut Through Data 🚀
 
-EDAxe is a Python library for automatic exploratory data analysis (EDA), missing‑value handling, and data cleaning.
+- EDAxe is a Python library for automatic exploratory data analysis (EDA), missing‑value handling, and data cleaning.
 ---
 
-## ⭐ Key Features
+## Key Features
 
 - **Missing value imputation**: mean, median, mode, MICE, etc.  
 - **Filtering tools**: drop rows/columns by missing‑value thresholds  
 - **Summary statistics**: automatic feature‑type detection, outlier analysis, skewness, missingness metrics, and ML readiness score  
-- **Interactive visualizations**: pie charts, bar charts, heatmaps, trend plotting (Plotly + Seaborn)  
+- **Interactive visualizations**: pie charts, bar charts, heatmaps, trend plotting (Plotly + Seaborn)  (COMING SOON)
 - **Saving support**: export summary tables to CSV  
 
 ---
 
-## 📦 Installation
+## Installation
 
 ```bash
 pip install git+https://github.com/PalliPlease/EDAxe.git
@@ -23,7 +23,7 @@ This installs **EDAxe** and its dependencies into your active Python environment
 
 ---
 
-## 🧪 Usage & Setup Guide (for Full Visuals in Jupyter / VSCode)
+##  Usage & Setup Guide (for Full Visuals in Jupyter / VSCode)
 
 ### 1. Create and activate a virtual environment (recommended)
 ```bash
@@ -58,7 +58,7 @@ pio.renderers.default = "notebook"       # Jupyter
 
 ---
 
-## 🚀 Example Usage
+##  Example Usage
 
 ```python
 import pandas as pd
@@ -78,7 +78,7 @@ summary = generate_summary(df, target="your_target_column", save=True, save_path
 
 ---
 
-## 🚿 Troubleshooting Table
+## Troubleshooting Table
 
 | Issue | Cause & Fix |
 |-------|-------------|
@@ -89,7 +89,7 @@ summary = generate_summary(df, target="your_target_column", save=True, save_path
 
 ---
 
-## ✅ Quick Data Demo
+## Quick Data Demo
 
 ```python
 import plotly.io as pio
@@ -109,7 +109,7 @@ generate_summary(df, target="age")
 
 ---
 
-## 🤝 Contributing & Development
+## Contributing & Development
 
 - Clone this repo and work inside `.venv`
 - Install in editable mode: `pip install -e .`  
