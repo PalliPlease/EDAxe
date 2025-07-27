@@ -58,12 +58,13 @@ def generate_summary(data, return_data=True, target=None, show=True, save=False,
         # I'm using this to check the num of unique vals to help decide whether it's constant, high_card or ID_like
         # and also to classify the data types
         nunique = data[col].nunique()
-        if data[col].dtype in ['int64', 'float64']:
+        if pd.api.types.is_numeric_dtype(data[col]):
             types['numeric'].append(col)
-        elif data[col].dtype.kind in {'M', 'm'}:
+        elif pd.api.types.is_datetime64_any_dtype(data[col]):
             types['datetime'].append(col)
         else:
             types['categorical'].append(col)
+
 
         if nunique == 1:
             types['constant'].append(col)
@@ -239,3 +240,5 @@ def generate_summary(data, return_data=True, target=None, show=True, save=False,
 
     if return_data:
         return summary
+
+generate_summary(data)
