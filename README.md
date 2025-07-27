@@ -1,4 +1,4 @@
-# EDAxe – Cut Through Data 🚀
+# EDAxe - Cut Through Data 
 
 - EDAxe is a Python library for automatic exploratory data analysis (EDA), missing‑value handling, and data cleaning.
 ---
