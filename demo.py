@@ -1,4 +1,4 @@
-from EDAxe.missing import *
+from EDAxe.preprocessing import *
 from EDAxe.summary import *
 import pandas as pd
 
