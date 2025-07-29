@@ -326,3 +326,92 @@ class AutoEncodingPreprocessor:
             elif typ == 'onehot':
                 mappings[col] = list(enc.categories_[0])
         return mappings
+
+
+from sklearn.preprocessing import StandardScaler, MinMaxScaler, Normalizer
+import pandas as pd
+import numpy as np
+
+
+class AutoScalerPreprocessor:
+    """
+    Automatically applies scaling to numeric features using standard, minmax or normalize strategy.
+
+    Parameters
+    ----------
+    strategy : str, default='auto'
+        One of {'auto', 'standard', 'minmax', 'normalize'}
+
+    columns : list or None, default=None
+        Columns to scale. If None, numeric columns are auto-detected.
+    """
+
+    def __init__(self, strategy='auto', columns=None):
+        self.strategy = strategy
+        self.columns = columns
+        self.scalers = {}
+        self.column_strategies = {}
+
+    def _choose_strategy(self, series):
+        # Basic heuristic: choose scaler based on range and distribution
+        std = series.std()
+        min_, max_ = series.min(), series.max()
+        range_ = max_ - min_
+        skew = series.skew()
+
+        if range_ <= 10:
+            return 'minmax'
+        elif abs(skew) < 1 and std < 1000:
+            return 'standard'
+        else:
+            return 'normalize'  # fallback for wide or weird cases
+
+    def fit(self, df):
+        if self.columns is None:
+            self.columns = df.select_dtypes(include='number').columns.tolist()
+
+        for col in self.columns:
+            col_data = df[[col]]
+
+            # Decide strategy
+            strat = self.strategy
+            if self.strategy == 'auto':
+                strat = self._choose_strategy(df[col])
+
+            # Select scaler
+            if strat == 'standard':
+                scaler = StandardScaler()
+            elif strat == 'minmax':
+                scaler = MinMaxScaler()
+            elif strat == 'normalize':
+                scaler = Normalizer()
+            else:
+                raise ValueError(f"Unsupported strategy: {strat}")
+
+            scaler.fit(col_data)
+            self.scalers[col] = scaler
+            self.column_strategies[col] = strat
+
+    def transform(self, df):
+        scaled_cols = []
+        for col in self.columns:
+            scaler = self.scalers[col]
+            data = df[[col]]
+
+            # Normalizer works row-wise → reshape
+            if self.column_strategies[col] == 'normalize':
+                scaled = scaler.transform(data.values.reshape(-1, 1))
+            else:
+                scaled = scaler.transform(data)
+
+            scaled_cols.append(pd.DataFrame(scaled, columns=[col], index=df.index))
+
+        return pd.concat(scaled_cols, axis=1)
+
+    def fit_transform(self, df):
+        self.fit(df)
+        return self.transform(df)
+
+    def get_scaler_info(self):
+        """Returns dict of {column: strategy_used}."""
+        return self.column_strategies
