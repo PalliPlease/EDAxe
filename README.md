@@ -6,7 +6,8 @@
 ## Key Features
 
 - **Missing value imputation**: mean, median, mode, MICE, etc.  
-- **Filtering tools**: drop rows/columns by missing‑value thresholds  
+- **Filtering tools**: drop rows/columns by missing‑value thresholds
+- **Auto Encoding**:
 - **Summary statistics**: automatic feature‑type detection, outlier analysis, skewness, missingness metrics, and ML readiness score  
 - **Interactive visualizations**: pie charts, bar charts, heatmaps, trend plotting (Plotly + Seaborn)  (COMING SOON)
 - **Saving support**: export summary tables to CSV  
